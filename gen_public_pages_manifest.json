@@ -1,0 +1,28 @@
+{
+  "format": "chopchae.webapp.public-pages.manifest",
+  "formatVersion": 1,
+  "generator": "chopchae-webapp",
+  "generatorVersion": "0.1.0",
+  "sourceRepository": "ChopChae/chopchae_webapp",
+  "sourceRef": "refs/heads/main",
+  "sourceCommit": "8d612dd7d0b0e11401098420df2136cb21586ebb",
+  "targetRepository": "ChopChae/chopchaepub",
+  "targetBranch": "gh-pages",
+  "publishRoot": ".",
+  "files": [
+    ".nojekyll",
+    "index.html",
+    "runtime-config.json",
+    "src/domain/config.js",
+    "src/domain/diagnostics.js",
+    "src/domain/exportBundle.js",
+    "src/domain/format.js",
+    "src/domain/model.js",
+    "src/domain/sequences.js",
+    "src/domain/sounds.js",
+    "src/domain/text.js",
+    "src/libraryBackends.js",
+    "src/main.js",
+    "src/styles.css"
+  ]
+}

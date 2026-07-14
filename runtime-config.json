@@ -1,0 +1,20 @@
+{
+  "storageBackend": "browser",
+  "libraryLabel": "Browser library",
+    "browserStorageName": "chopchae-webapp-pages-library",
+    "seedLibrary": {
+    "config": "[config]\nversion = 1\n",
+    "sounds": [
+      {
+        "name": "sound0.txt",
+        "content": "// simple instruments, with a trigger and an accent CV.  Numerals\n// will control the accent CV.  0 = 10% -> 9 == 100%\n\nsound(kick,#,yellow,29) = {\n0,0: T   // trigger\n0,1: N   // accent CV\n}\n\nsound(kick,X,orange,30) = {\n0,0: T   // trigger\n0,1: 50   // accent CV\n0,2: 100,100,100,90,90,90,80,80\n}\n\nsound(kick,Z,red,31) = {\n0,0: T    // trigger\n0,1: 100   // accent CV\n0,2: 100,100,100,90,90,90,80,80\n}\n\nsound(tomHi,#,1,green) = {\n0,4: T   // trigger\n0,5: N   // accent CV\n}\n\nsound(tomMid,#,2) = {\n0,6: T   // trigger\n0,7: N   // accent CV\n}\n\nsound(tomLo,#,blue,5) = {\n1,0: T   // trigger\n1,1: N   // accent CV\n}\n\nsound(sticks,#,cyan) = {\n1,2: T   // trigger\n1,3: N   // accent CV\n}\n\nsound(crash,#) = {\n1,4: T   // trigger\n1,5: N   // accent CV\n}\n\nsound(ride,#) = {\n1,6: T   // trigger\n1,7: N   // accent CV\n1,4: 100,90,80,70\n}\n\nsound(hihatOpen,#) = {\n0,0: T   // trigger\n0,1: N   // accent CV\n}\n\nsound(hihatClosed,#) = {\n0,2: T   // trigger\n0,3: N   // accent CV\n}\n\nsound(snare,#,#8899c0) = {\n0,4: T   // trigger\n0,5: N   // accent CV\n}\n\n"
+      }
+    ],
+    "sequences": [
+      {
+        "name": "sequence0.txt",
+        "content": "\n\ninstruments =\nkick\nsnare\nhihatClosed\n\n\n\nbpm = 120\ncpb = 4\nqpc = 6     # equivalent to 24 quanta per quarter note\n\n\n\ntab intro1 =\n9-------7-------|9-------7-------|  #  kick\n----7-------7---|----7-------97--|  #  snare\n----------------|----------------|  #  hihatClosed\n\n\ntab intro2 =\n9-------7-------|9-------7-------|  #  kick\n----7-------7---|----7-------97--|  #  snare\n9-6-7-6-8-6-7-6--9-6-7-6-8-6-7-6-|  #  hihatClosed\n\n\nsequence song =\ntempo 120 intro1 intro2 x3\n\n\n\n\n"
+      }
+    ]
+  }    
+}
