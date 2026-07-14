@@ -61,6 +61,7 @@ const SEQUENCE_DEFAULT_CELL_SIZE = 24;
 const SEQUENCE_HISTORY_LIMIT = 60;
 const SEQUENCE_BAR_BEAT_OPTIONS = [1, 2, 3, 4, 5, 6, 7, 8];
 const SEQUENCE_BEAT_COLUMN_OPTIONS = [1, 2, 4, 8, 16];
+const SPLASH_IMAGE_PATH = "./assets/chopchae-splash.jpeg";
 const runtime = await initializeRuntime();
 
 const state = {
@@ -97,7 +98,8 @@ const state = {
   selectedSoundIndex: 0,
   envelopeDrag: null,
   soundNotes: {},
-  showPatchView: false
+  showPatchView: false,
+  splashVisible: true
 };
 
 const app = document.querySelector("#app");
@@ -139,7 +141,7 @@ function render() {
   const active = state.assets[state.activeType];
 
   app.innerHTML = `
-    <div class="shell">
+    <div class="shell" ${state.splashVisible ? 'aria-hidden="true"' : ""}>
       <main class="workspace ${state.libraryVisible ? "" : "library-hidden"}">
         <nav class="rail" aria-label="Asset type">
           ${Object.entries(ASSET_TYPES).map(([type, config]) => renderTab(type, config)).join("")}
@@ -157,9 +159,27 @@ function render() {
       ${renderDiagnosticsDialog()}
       ${renderActivityLog()}
     </div>
+    ${renderSplashScreen()}
   `;
 
   bindEvents();
+}
+
+function renderSplashScreen() {
+  if (!state.splashVisible) {
+    return "";
+  }
+
+  return `
+    <section class="splash-screen" role="dialog" aria-modal="true" aria-label="Chop Chae splash page">
+      <div class="splash-frame">
+        <div class="splash-image-wrap">
+          <img class="splash-image" src="${SPLASH_IMAGE_PATH}" alt="Modular synthesizer patched with noodles" decoding="async" fetchpriority="high">
+        </div>
+        <button class="splash-enter" data-action="enter-splash" type="button">CHOP CHAE</button>
+      </div>
+    </section>
+  `;
 }
 
 function renderEditor(active) {
@@ -1646,6 +1666,11 @@ function renderConfigPreview(config) {
 }
 
 function bindEvents() {
+  app.querySelector("[data-action='enter-splash']")?.addEventListener("click", dismissSplash);
+  if (state.splashVisible) {
+    app.querySelector("[data-action='enter-splash']")?.focus();
+  }
+
   bindMenuControls();
 
   app.querySelectorAll("[data-action='select-type']").forEach((button) => {
@@ -1939,6 +1964,10 @@ function clearSequenceInstrumentDragClasses(className = null) {
 }
 
 function handleGlobalKeyDown(event) {
+  if (state.splashVisible) {
+    return;
+  }
+
   if (event.key === "Escape" && state.diagnosticsOpen) {
     state.diagnosticsOpen = false;
     render();
@@ -1968,6 +1997,11 @@ function handleGlobalKeyDown(event) {
   } else {
     undoSequenceEdit();
   }
+}
+
+function dismissSplash() {
+  state.splashVisible = false;
+  render();
 }
 
 function setSequenceView(view) {
